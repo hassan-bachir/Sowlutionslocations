@@ -29,6 +29,16 @@ CREATE TABLE IF NOT EXISTS location_sessions (
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS location_points (
+      id TEXT PRIMARY KEY,
+      session_id TEXT NOT NULL,
+      latitude REAL NOT NULL,
+      longitude REAL NOT NULL,
+      recorded_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (session_id) REFERENCES location_sessions(id) ON DELETE CASCADE
+    );
+
 
   `);
 };

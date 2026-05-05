@@ -115,7 +115,7 @@ export const listLocationSessions = async (userId, db) => {
           ON location_points.session_id = location_sessions.id
         WHERE location_sessions.user_id = ?
         GROUP BY location_sessions.id
-        ORDER BY location_sessions.started_at DESC, location_sessions.created_at DESC
+       
       `,
     )
     .all(userId)

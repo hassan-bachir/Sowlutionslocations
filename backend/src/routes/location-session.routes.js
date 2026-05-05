@@ -9,6 +9,16 @@ import {
   startLocationSession,
   stopLocationSession,
 } from "../services/location-session.service.js";
+import {
+  latestLocationPointSchema,
+  locationHistorySchema,
+  saveLocationPointSchema,
+} from "../schemas/location-point.schemas.js";
+import {
+  getLocationHistory,
+  getLatestLocationPoint,
+  saveLocationPoint,
+} from "../services/location-point.service.js";
 
 export const locationSessionRoutes = async (app) => {
   app.get(

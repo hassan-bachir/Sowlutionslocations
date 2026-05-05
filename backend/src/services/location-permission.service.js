@@ -52,7 +52,7 @@ export const listLocationViewers = async (ownerUserId, db) => {
         INNER JOIN users
           ON users.id = location_permissions.viewer_user_id
         WHERE location_permissions.owner_user_id = ?
-        ORDER BY location_permissions.created_at DESC
+       
       `,
     )
     .all(ownerUserId);

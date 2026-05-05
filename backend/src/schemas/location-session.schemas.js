@@ -25,7 +25,7 @@ export const listLocationSessionsSchema = {
   response: {
     200: {
       type: "object",
-      required: ["cached", "data"],
+      required: ["data"],
       properties: {
         cached: { type: "boolean" },
         data: {
