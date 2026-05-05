@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import fastifyCors from "@fastify/cors";
 import fastifyJwt from "@fastify/jwt";
+import fastifyWebsocket from "@fastify/websocket";
 import { AppError } from "./utils/errors.js";
 import { database } from "./db/database.js";
 import { runMigrations } from "./db/migrations.js";
@@ -32,6 +33,8 @@ export const buildApp = async () => {
       expiresIn: "1h",
     },
   });
+
+  await app.register(fastifyWebsocket);
 
   app.setErrorHandler((error, request, reply) => {
     if (error instanceof AppError) {

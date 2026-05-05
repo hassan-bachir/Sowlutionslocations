@@ -48,18 +48,6 @@ const parseJson = (message) => {
   }
 };
 
-const isValidLocationMessage = (message) => {
-  return (
-    typeof message.sessionId === "string" &&
-    typeof message.latitude === "number" &&
-    message.latitude >= -90 &&
-    message.latitude <= 90 &&
-    typeof message.longitude === "number" &&
-    message.longitude >= -180 &&
-    message.longitude <= 180
-  );
-};
-
 export const realtimeRoutes = async (app) => {
   app.get("/location", { websocket: true }, (socket, request) => {
     const token = request.query.token;
@@ -94,16 +82,6 @@ export const realtimeRoutes = async (app) => {
           JSON.stringify({
             type: "error",
             message: "Unsupported message type",
-          }),
-        );
-        return;
-      }
-
-      if (!isValidLocationMessage(message)) {
-        socket.send(
-          JSON.stringify({
-            type: "error",
-            message: "Invalid location payload",
           }),
         );
         return;
