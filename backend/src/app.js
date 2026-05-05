@@ -7,6 +7,7 @@ import { runMigrations } from "./db/migrations.js";
 import { authRoutes } from "./routes/auth.routes.js";
 import { locationPermissionRoutes } from "./routes/location-permission.routes.js";
 import { locationSessionRoutes } from "./routes/location-session.routes.js";
+import { realtimeRoutes } from "./routes/realtime.routes.js";
 
 export const buildApp = async () => {
   const app = Fastify({
@@ -67,5 +68,7 @@ export const buildApp = async () => {
   await app.register(locationSessionRoutes, {
     prefix: "/api/location-sessions",
   });
+  await app.register(realtimeRoutes, { prefix: "/ws" });
+
   return app;
 };

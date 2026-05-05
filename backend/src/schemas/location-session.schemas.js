@@ -27,7 +27,6 @@ export const listLocationSessionsSchema = {
       type: "object",
       required: ["data"],
       properties: {
-        cached: { type: "boolean" },
         data: {
           type: "array",
           items: locationSessionWithCountResponse,

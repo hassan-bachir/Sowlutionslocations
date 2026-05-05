@@ -129,14 +129,15 @@ export const getLatestLocationPoint = async (sessionId, userId, db) => {
 };
 
 export const getLocationHistory = async (sessionId, userId, query, db) => {
-  const page = Number(query.page ?? 1);
-  const limit = Number(query.limit ?? 20);
-  const offset = (page - 1) * limit;
   const session = findVisibleSessionForUser(db, sessionId, userId);
 
   if (!session) {
     throw new NotFoundError("Location session not found");
   }
+
+  const page = Math.max(Number(query.page) || 1, 1);
+  const limit = Math.min(Math.max(Number(query.limit) || 50, 1), 100);
+  const offset = (page - 1) * limit;
 
   const total = db
     .prepare(
@@ -150,7 +151,7 @@ export const getLocationHistory = async (sessionId, userId, query, db) => {
   const rows = db
     .prepare(
       `
-        SELECT id, session_id, latitude, longitude, accuracy, altitude, speed, heading, recorded_at, created_at
+        SELECT id, session_id, latitude, longitude, recorded_at, created_at
         FROM location_points
         WHERE session_id = ?
         ORDER BY recorded_at ASC, created_at ASC

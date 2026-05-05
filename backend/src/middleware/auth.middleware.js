@@ -9,6 +9,6 @@ export const authenticate = async (request) => {
       email: decodedToken.email,
     };
   } catch {
-    throw new UnauthorizedError("Missing or invalid token");
+    throw new UnauthorizedError("missing or invalid token");
   }
 };

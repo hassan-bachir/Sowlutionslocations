@@ -73,15 +73,14 @@ export const locationHistorySchema = {
     additionalProperties: false,
     properties: {
       page: { type: "integer", minimum: 1, default: 1 },
-      limit: { type: "integer", minimum: 1, maximum: 100, default: 20 },
+      limit: { type: "integer", minimum: 1, maximum: 100, default: 50 },
     },
   },
   response: {
     200: {
       type: "object",
-      required: ["cached", "data", "pagination"],
+      required: ["data", "pagination"],
       properties: {
-        cached: { type: "boolean" },
         data: {
           type: "array",
           items: locationPointResponse,
